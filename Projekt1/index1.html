@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodawanie elementów listy przyciskiem. Co trzeci element ma większy font</title>
+    <style>
+        .big{
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+   <button>Dodaj element listy</button>
+   <ul>Moja lista</ul>
+
+
+
+
+<script>
+
+    const btn = document.querySelector('button');
+    const ul = document.querySelector('ul');
+    let liNumber = 1;
+    btn.addEventListener('click', function(){
+        const liElement = document.createElement('li');
+        liElement.textContent=liNumber;
+        if(liNumber%3==0){
+            liElement.classList.add('big');
+        }
+        liNumber=liNumber+2;
+        ul.appendChild(liElement);
+    })
+
+
+</script>
+</body>
+
+
+
+
+</html>

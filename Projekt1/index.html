@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt 1 Dodawanie elementów po kliknięciu, co piąty element kółkiem</title>
+    <style>
+        button{
+            display:block;
+            margin: 10px auto;
+        }
+
+        div{
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            margin: 5px;
+            float: left;
+            color: white;
+            line-height: 30px;
+            text-align: center;
+            border: 2px solid black;
+        }
+        .circle{
+            background-color: white;
+            border-radius: 50%;
+            color: black;
+            border: 2px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    <button>Utwórz element</button>
+  
+  <!--  1. Pobranie przycisku button
+        2. Ustawienie nasłuchiwania na button. Po kliknięciu w przycisk, ma zostać wywołana funkcja. To może być funkcja anonimowa, ale nie musi.
+        W tym przypadku tworzę funkcję za pomocą wyrażenia funkcyjnego (odwołuję się do funkcji poprzez zmienną) Często jest też tak, że nasłuchiwanie dodajemy na koniec kodu. 
+        3. Stworzenie nowego elementu div i ustawienie mu właściwości textContent, która będzie wyświetlała kolejne liczby
+        4. Dodanie elementu div do strony
+        5. Stworzenie licznika i uzupełnienie zawawrtości diva o wartość licznika
+        6. Co piąty element ma być kołem - za pomocą instrukcji warunkowej sprawdzenie czy dany element jest piąty, jeśli tak to nadanie mu klasy .circle.
+    -->
+  <script>
+      const btn = document.querySelector('button');
+      let number = 1;
+      const addElement = function(){
+        const div = document.createElement('div');
+        div.textContent=number;
+        if(number%5===0){
+            div.classList.add('circle');
+        }
+        document.body.appendChild(div);
+        number++;
+        console.log(number);
+      }
+
+
+      btn.addEventListener('click', addElement);
+   </script>
+
+</body>
+</html>
