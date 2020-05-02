@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pojawienie się elementu i powiększanie go przez kliknięcie</title>
+    <style>
+        li{
+            list-style-type: none;
+        }
+
+    </style>
+</head>
+<body>
+  
+
+<script>
+// 1. Utworzenie buttona z napisem Start.
+// 2. Utworzenie elementu li z textContent "Element 1" i dodanie go do strony
+// 3. Stworzenie pętli, która doda 7 takich elementów.
+// 3a. Domyślna właściwość display: none
+// 4. Utworzenie nasłuchiwania na button Start i funkcję, która powiększa element przy każdym kliknięciu
+// 5. Za pierwszym kliknięciem wszystkie elementy mają się wyświetlić - zmiana właściwości display;
+// 6. Przy każdym kolejnym kliknięciu elementy mają się powiększać o ileś pikseli
+
+const btn = document.createElement('button');
+btn.textContent="Start";
+document.body.appendChild(btn);
+const ul = document.createElement('ul');
+ul.style.display='none';
+document.body.appendChild(ul);
+
+let textCon= 1;
+let createEl= function(){
+    for(i=0; i<10; i++){
+        liElement=document.createElement('li');
+        liElement.textContent=`Element ${textCon}`;
+        ul.appendChild(liElement);
+        textCon++;
+    }
+}
+
+let showList= function(){
+    ul.style.display='block';
+    enlargeFont(); //w celu optymalizacji - nie warto robić nowej funkcji tylko wpisać kod enlargeFont - do funkcji showList
+}
+let fontSize = 20;
+function enlargeFont(){
+    ul.style.fontSize=fontSize+"px";
+    fontSize += 5;
+}
+window.addEventListener("load", createEl);
+window.addEventListener('click', showList);
+</script>
+</body>
+</html>
