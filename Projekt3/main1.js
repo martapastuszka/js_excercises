@@ -19,31 +19,38 @@
 // - bez zmian w pliku html (nie dodajemy html-a i css-a). Cały kod piszemy w elemencie main.js
 
 // -->
-
-
 let size = 10;
 let orderElement = 1;
 
 const init = () => {
    const btn = document.createElement('button');
+   const btnReset = document.createElement('button');
    btn.textContent='Stwórz listę';
+   btnReset.textContent="Resetuj listę";
    document.body.appendChild(btn);
+   document.body.appendChild(btnReset);
    const ul = document.createElement('ul');
    document.body.appendChild(ul);
-   btn.addEventListener('click', createLiElements);
-   console.log("init");
+   btn.addEventListener('click', createLiElements); //Możemy się w tym miejscu odwołać do tej funkcji, ponieważ wywołanie inita jest na samym końcu, kiedy funkcja createLiElements już istnieje).
+   btnReset.addEventListener('click', resetList);
 }
 const createLiElements = () => {
     const myUl = document.querySelector('ul');
     // let fontSize = 10; - tak wcześniej zrobiłam. Źle, ponieważ po wykonaniu się funkcji, fontSize znowu się resetował do 10px. Dlatego za każdym kliknięciem zaczynałam od fontSize 10px. Gdy zmienna globalna, to przechowuje ostatnią wartość.
     for(i=0; i<10; i++){
         const li = document.createElement('li');
+        li.textContent=`Element ${orderElement}`;
+        li.style.fontSize=`${size}px`;
         myUl.appendChild(li);
-        li.textContent=`Element ${orderElement}`
-        li.style.fontSize=`${size}px`
-        size += 1;
         orderElement++;
+        size += 1;
     } 
+}
+
+const resetList = () =>{
+    document.querySelector('ul').textContent="";
+    size = 10;
+    orderElement = 1;
 }
 
 init();
