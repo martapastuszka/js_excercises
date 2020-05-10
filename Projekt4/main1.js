@@ -4,24 +4,49 @@
 // jesli wartość dla x i y jest nieparzysta to kolor niebieski
 // jeśli jedna z wartości jest parzysta a druga nieparzysta to kolor zielony
 
-document.body.addEventListener('click', (e) =>{
-    const X = e.clientX;
-    const Y = e.clientY;
-    const bodyEl=document.querySelector('body');
-    if(X%2==0 && Y%2==0){
-        console.log(X,Y);
-        bodyEl.style.backgroundColor='red';
-    }
-    else if(X%2!=0 && Y%2!=0){
-        console.log(X,Y);
-        bodyEl.style.backgroundColor='blue';
-    }
-    else if(X%2==0 && Y%2!=0){
-        console.log(X,Y);
-        bodyEl.style.backgroundColor='green';
+// document.body.addEventListener('click', (e) =>{
+//     const X = e.clientX;
+//     const Y = e.clientY;
+//     const bodyEl=document.querySelector('body');
+//     if(X%2==0 && Y%2==0){
+//         console.log(X,Y);
+//         bodyEl.style.backgroundColor='red';
+//     }
+//     else if(X%2!=0 && Y%2!=0){
+//         console.log(X,Y);
+//         bodyEl.style.backgroundColor='blue';
+//     }
+//     else if(X%2==0 && Y%2!=0){
+//         console.log(X,Y);
+//         bodyEl.style.backgroundColor='green';
+//     }
+//     else{
+//      console.log(X,Y);
+//      bodyEl.style.backgroundColor='green';
+//     }
+// })
+
+// rozwiązanie Samuraja:
+
+document.body.addEventListener('click', (event)=>{
+    console.log(event.clientX, event.clientY);
+    const color = getColor(event);
+    document.body.style.backgroundColor = color;
+})
+
+const getColor = (e) =>{
+    if(e.clientX % 2 ==0){
+        if(e.clientY % 2 ==0){
+            return "red";
+        }
+        else{
+            return "green";
+        }
     }
     else{
-     console.log(X,Y);
-     bodyEl.style.backgroundColor='green';
+        if(e.clientY % 2 ==0){
+            return "green";
+        }
+        else return "blue";
     }
-})
+}
