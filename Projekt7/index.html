@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+ <meta charset="UTF-8">
+ <title>Wylosuj imię dla dziecka</title>
+ <style>
+  html {
+   font-family: arial;
+  }
+
+  button {
+   display: block;
+   margin: 50px auto 50px;
+   background-color: #fff;
+   border: 5px solid cadetblue;
+   padding: 20px 50px;
+   font-size: 22px
+  }
+
+  div {
+   margin: 10px;
+   font-size: 26px;
+   text-align: center;
+  }
+ </style>
+</head>
+
+<body>
+ <button>Losuj imię dla dziecka</button>
+ <div></div>
+
+ <script>
+     const btn = document.querySelector('button');
+     const div = document.querySelector('div');
+
+     const names = ["Jagienka", "Dobrawa (Dobrusia)", "Daria", "Asia", "Kira", "Marysia", "Anastazja", "Kasia", "Zosia"];
+
+     const prefix = ["Wydaje mi się", "Mam wrażenie", "Szczerze powiedziawszy, myślę", "Szczerze uważam", "Na 100% twierdzę", "Jestem pewien"];
+
+     const nameGenerator = ()=>{
+        const indexName = Math.floor(Math.random()* names.length); //ten zapis umożliwa losowanie zawsze z elementów tablicy, niezależnie od tego czy długość tablicy się zmienia czy nie. Jeżeli zmienilibyśmy zawartość tablicy na 2 pozycje, a mnożyli przez konkretną liczbę, np. 7, to efektem będzie od czasu do czasu undefined.
+
+       // Jedno z rozwiązań:
+        // const indexPrefix = Math.floor(Math.random()* prefix.length);
+        // div.textContent = `${prefix[indexPrefix]} że najlepsze imię to ${names[indexName]}`;
+
+        //Drugie rozwiązanie
+        div.textContent = `${prefix[Math.floor(Math.random()*prefix.length)]}, że najlepsze będzie imię ${names[indexName]}`
+     }
+
+     btn.addEventListener('click', nameGenerator)
+
+ </script>
+</body>
+
+</html>
