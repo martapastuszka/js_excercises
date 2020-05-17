@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Typing - zadanie 1</title>
+ <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&amp;subset=latin-ext" rel="stylesheet">
+
+
+ <style>
+  div {
+   font-family: roboto;
+   max-width: 80%;
+   margin: 20px auto;
+   font-size: 20px;
+   letter-spacing: 1px;
+  }
+ </style>
+</head>
+
+<body>
+ <div>
+  <span class="text"></span>
+ </div>
+
+ <script>
+     const spnText = document.querySelector('.text');
+     const txt = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam dolore accusantium laborum nostrum! Perspiciatis earum, itaque illum quia debitis deleniti dignissimos aperiam impedit natus pariatur voluptates, at obcaecati nisi? A laboriosam, provident, reprehenderit voluptatem mollitia debitis voluptatum at consectetur unde quas, porro fuga quis sit? Quo incidunt eos quaerat numquam!";
+
+     
+     let indexText = 0;
+     const time = 40;
+     const addLetter = ()=>{
+         spnText.textContent += txt[indexText];
+         indexText++;
+         if(indexText===txt.length) clearInterval(indexTyping);
+     }
+     const indexTyping = setInterval(addLetter, time) //Ta funkcja musi zostać odwołana, gdy chcemy przerwać, ponieważ nie przerwie działania po wypisaniu całego stringa automatycznie, będzie się wykonywała do końca trwania programu. Funkcja zwraca swój index.
+
+ </script>
+</body>
+
+</html>
