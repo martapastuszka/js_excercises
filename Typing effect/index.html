@@ -17,17 +17,25 @@
    font-size: 20px;
    letter-spacing: 1px;
   }
+  .cursor{
+      opacity: 0;
+      transition: 0.2s;
+  }
+  .cursor.active{
+      opacity: 1;
+  }
  </style>
 </head>
 
 <body>
  <div>
-  <span class="text"></span>
+  <span class="text"></span><span class="cursor">|</span>
  </div>
 
  <script>
      const spnText = document.querySelector('.text');
-     const txt = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam dolore accusantium laborum nostrum! Perspiciatis earum, itaque illum quia debitis deleniti dignissimos aperiam impedit natus pariatur voluptates, at obcaecati nisi? A laboriosam, provident, reprehenderit voluptatem mollitia debitis voluptatum at consectetur unde quas, porro fuga quis sit? Quo incidunt eos quaerat numquam!";
+     const spnCursor = document.querySelector('.cursor');
+     const txt = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam dolore accusantium laborum nostrum! ";
 
      
      let indexText = 0;
@@ -37,7 +45,15 @@
          indexText++;
          if(indexText===txt.length) clearInterval(indexTyping);
      }
+
+     const cursorAnimation = ()=>{
+         spnCursor.classList.toggle('active');
+
+     }
      const indexTyping = setInterval(addLetter, time) //Ta funkcja musi zostać odwołana, gdy chcemy przerwać, ponieważ nie przerwie działania po wypisaniu całego stringa automatycznie, będzie się wykonywała do końca trwania programu. Funkcja zwraca swój index.
+
+    
+     setInterval(cursorAnimation, 400)
 
  </script>
 </body>

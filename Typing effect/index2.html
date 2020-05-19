@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Typing - zadanie dla Ciebie</title>
+ <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&amp;subset=latin-ext" rel="stylesheet">
+
+
+ <style>
+  div {
+   font-family: roboto;
+   max-width: 80%;
+   margin: 20px auto;
+   font-size: 60px;
+   letter-spacing: 1px;
+  }
+
+  .cursor {
+   opacity: 0;
+   transition: .2s;
+  }
+
+  .cursor.active {
+   opacity: 1;
+  }
+ </style>
+</head>
+
+<body>
+ <div>
+  <span class="text"></span><span class="cursor">|</span>
+ </div>
+
+ <script>
+
+// http://websamuraj.pl/examples/js/projekt8/
+// Uzyskaj efekt jak pod tym linkiem 
+// Użyj setTimeout zamiast setInterval,
+// Opóźniaj start pisanie każdego słowa
+// Uwaga: Zadanie bardzo trudne
+// Dorobić zwłokę po wyświetleniu wyrazu
+// Skasować zawartość spana po wyświetleniu wyrazu
+
+const spnText = document.querySelector('.text');
+const spnCursor = document.querySelector('.cursor');
+const txt = ['tekst1', 'abc', '123'];
+let txtIndex=0;
+let txtIndexElement=0;
+let counter = 0;
+
+// Implementacja
+const addLetter = () => {
+ // Użyj w środku setTimeout
+    if(counter >= 5 && counter <=txt[txtIndex].length + 5){
+        if(txtIndex<txt.length){ 
+            if(txtIndexElement<txt[txtIndex].length){
+                spnText.textContent += txt[txtIndex][txtIndexElement];
+                txtIndexElement++;
+            }
+            else{
+                txtIndexElement=0;
+                txtIndex++; 
+            }
+        }
+    }	
+    counter++;
+    if(counter > txt[txtIndex].length + 10){
+        counter=0;
+        spnText.textContent='';
+    }
+
+    setTimeout(addLetter,200);
+}
+
+addLetter(); //pierwsze wywołanie
+
+
+// Animacja kursora (zostaw bez zmian)
+const cursorAnimation = () => {
+ spnCursor.classList.toggle('active');
+}
+setInterval(cursorAnimation, 400);
+ </script>
+</body>
+
+</html>
