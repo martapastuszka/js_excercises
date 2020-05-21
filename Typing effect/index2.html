@@ -55,69 +55,22 @@ let counter = 0;
  let activeText=0;
 // Implementacja
 const addLetter = () => {
- // Użyj w środku setTimeout
-    // if(counter >= 5 && counter <=txt[txtIndex].length + 5){
-    //     if(txtIndex<txt.length){ 
-    //         if(txtIndexElement<txt[txtIndex].length){
-    //             spnText.textContent += txt[txtIndex][txtIndexElement];
-    //             txtIndexElement++;
-    //         }
-    //         else{
-    //             txtIndexElement=0;
-    //             txtIndex++; 
-    //         }
-    //     }
-    // }	
-    // counter++;
-    // if(counter > txt[txtIndex].length + 10){
-    //     counter=0;
-    //     spnText.textContent='';
-    // }
-
-    // setTimeout(addLetter,200);
-
-//Druga wersja - pojawiają sie wyrazy po kolei - nie ustawione opóźnienie prawidłowo.
-//     if(txtIndex<txt.length){
-//     	if(txtIndexElement<txt[txtIndex].length){
-//     		console.log(txtIndexElement);
-//     		spnText.textContent += txt[txtIndex][txtIndexElement];
-//     		txtIndexElement++;
-//     	}
-//     	else{
-//     		spnText.textContent='';
-//     		txtIndex++;
-//     		txtIndexElement=0;
-//     	}
-// 	setTimeout(addLetter,500);
-// 	}
-// }
-//     const delay =(miliseconds)=>{
-// 	const date = Date.now();
-// 	let currentDate = null; 
-// 	do{
-//         currentDate = Date.now();
-//     }while(currentDate-date < miliseconds);
-
-//Trzecia wersja - Samuraja
-if(activeLetter>=0){
-spnText.textContent +=txt[activeText][activeLetter];
+    if(activeLetter>=0){
+        spnText.textContent +=txt[activeText][activeLetter];
+    }
+    activeLetter++;
+    if(activeLetter === txt[activeText].length){
+        activeText++;
+        if(activeText === txt.length)return;
+        return setTimeout(()=>{
+            activeLetter = -15;
+            spnText.textContent='';
+            addLetter();
+        },2000);
+    }
+    setTimeout(addLetter,100)
 }
-activeLetter++;
-if(activeLetter === txt[activeText].length){
-    activeText++;
-    if(activeText === txt.length)return;
 
-    return setTimeout(()=>{
-        activeLetter = -15;
-        spnText.textContent='';
-        addLetter();
-    },2000);
-}
-setTimeout(addLetter,100)
-
-
-}
-// delay(5000);
 addLetter(); //pierwsze wywołanie
 
 
