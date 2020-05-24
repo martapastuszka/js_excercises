@@ -117,16 +117,17 @@
   		h1.textContent = slideList[active].text;
   		changeDot();
   	}
-  	setInterval(changeSlide, time);
+  	const timer = setInterval(changeSlide, time);
 
     const keyChangeSlide = (e) =>{
+      clearInterval(timer);
       if(e.keyCode === 37){
         console.log("strzałka w lewo");
-        changeSlide()
+        changeSlide();
       } 
       else if(e.keyCode ===39){
         console.log('strzałka w prawo');
-        changeSlide()
+        changeSlide();
       }
     }
 
