@@ -73,7 +73,7 @@
 
   <script>
 
-    // 1. Klawisz <- (stzałka w lewo) przesuwa w lewo (cofa) slider
+// 1. Klawisz <- (stzałka w lewo) przesuwa w lewo (cofa) slider
 // 2. Klawisz -> (stzałka w lewo) przesuwa w prawo slider (do przod, czyli tak jak przy funkcji changeSlide) 
 // lewa strzałka: keyCode = 37
 // prawy strzałka: keyCode = 39
@@ -99,7 +99,6 @@
   	const dots = [...document.querySelectorAll('.dots span')];
   	//Musimy zamienić elementy na tablicę, możemy to zrobić za pomocą operatora rest. 
 
-  	//Interfejs
   	const time = 3000;
   	let active =0;
 
@@ -115,14 +114,24 @@
   			active=0;
   		}
   		image.src = slideList[active].img;
-  		image.text = slideList[active].text;
+  		h1.textContent = slideList[active].text;
   		changeDot();
   	}
-
   	setInterval(changeSlide, time);
 
+    const keyChangeSlide = (e) =>{
+      if(e.keyCode === 37){
+        console.log("strzałka w lewo");
+        changeSlide()
+      } 
+      else if(e.keyCode ===39){
+        console.log('strzałka w prawo');
+        changeSlide()
+      }
+    }
+
     // utwórz funkcje keyChangeSlide. Zadanie może wymagać także zmian poza funkcją.
-window.addEventListener('keydown', keyChangeSlide)
+    window.addEventListener('keydown', keyChangeSlide)
 
   </script>
 </body>
