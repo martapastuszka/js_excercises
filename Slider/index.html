@@ -102,6 +102,7 @@
   	const time = 3000;
   	let active = 0;
     let direction = "right";
+ 
 
   	const changeDot = () =>{
   		const activeDot = dots.findIndex(dot =>
@@ -109,6 +110,7 @@
   			dots[activeDot].classList.remove('active');
   			dots[active].classList.add('active');
   	}
+
   	const changeSlide = ()=>{
       if(direction === 'right'){
         active++;
@@ -122,8 +124,8 @@
       image.src = slideList[active].img;
       h1.textContent = slideList[active].text;
       changeDot();
+      direction = 'right';
   	}
-  	const timer = setInterval(changeSlide, time);
 
     const keyChangeSlide = (e) =>{
       console.log(active);
@@ -136,7 +138,9 @@
         direction = 'right';
         changeSlide();
       }
+      timer = setInterval(changeSlide, time);
     }
+    let timer = setInterval(changeSlide, time);
 
     // utwórz funkcje keyChangeSlide. Zadanie może wymagać także zmian poza funkcją.
     window.addEventListener('keydown', keyChangeSlide)
