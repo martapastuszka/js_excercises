@@ -100,7 +100,8 @@
   	//Musimy zamienić elementy na tablicę, możemy to zrobić za pomocą operatora rest. 
 
   	const time = 3000;
-  	let active =0;
+  	let active = 0;
+    let direction = "right";
 
   	const changeDot = () =>{
   		const activeDot = dots.findIndex(dot =>
@@ -109,24 +110,30 @@
   			dots[active].classList.add('active');
   	}
   	const changeSlide = ()=>{
-  		active++;
-  		if(active === slideList.length){
-  			active=0;
-  		}
-  		image.src = slideList[active].img;
-  		h1.textContent = slideList[active].text;
-  		changeDot();
+      if(direction === 'right'){
+        active++;
+        if(active === slideList.length) active=0;
+      }
+      else{
+        active--;
+        if(active < 0) active = slideList.length-1;
+      }
+      console.log(active);
+      image.src = slideList[active].img;
+      h1.textContent = slideList[active].text;
+      changeDot();
   	}
   	const timer = setInterval(changeSlide, time);
 
     const keyChangeSlide = (e) =>{
+      console.log(active);
       clearInterval(timer);
       if(e.keyCode === 37){
-        console.log("strzałka w lewo");
+        direction = 'left';
         changeSlide();
       } 
       else if(e.keyCode ===39){
-        console.log('strzałka w prawo');
+        direction = 'right';
         changeSlide();
       }
     }
