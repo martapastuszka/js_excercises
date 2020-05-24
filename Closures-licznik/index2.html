@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licznik z closure</title>
+</head>
+<body>
+    <script>
+// function x() {
+//  let number = 0;
+//  function y() {
+//   console.log(number);
+//  }
+//  return y
+// }
+
+// const example = x();
+
+// example()
+
+// Closure (domknięcie) to mechanizm, który pomaga nam uzyskać dostęp do danej wartości poza funkcją i gdy ta funkcja nie jest już aktywna.
+
+// Closure - zmienna istnieje w innej funkcji, mimo, że funkcja, w której była stworzona ta zmienna nie jest już aktywna. 
+
+//W pamieci programu zmienna istnieje jeśli prowadzi do niej referencja z innej funkcji. Mozemy mieć do niej dostęp, ale także je zmieniać.
+
+const add = (start = 0)=>{
+    let number = start;
+    // Jeżeli myślimy o closures to często w kontekście zwracania jakiejś funkcji
+    return () =>{
+        number++;
+        document.body.textContent = `Aktualny stan licznika to ${number}`;
+    }
+}
+
+const counter = add();
+const counterFromFive = add(5);
+// powyżej do zmiennej counter przypisujemy return z funkcji add(). Z innej funkcji zwracamy funkcję.
+//do add() możemy wpisać jakąś liczbę, np. 4 - wtedy liczenie rozpocznie się od 4. Jeżeli nic nie przekażemy to rozpocznie się od zera, ponieważ tak domyślnie określiliśmy.
+
+
+document.addEventListener('click', counter);
+    </script>
+</body>
+</html>

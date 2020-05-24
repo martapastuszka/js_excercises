@@ -1,0 +1,22 @@
+<!-- Closures pozwala nam mieć dostęp do danych z jednego zakresu, w innym zakresie (nawet jak pierwotny zakres nie istnieje) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licznik bez closure</title>
+</head>
+<body>
+    <script>
+        let number = 0;
+        const add = ()=>{
+            number++;
+            document.body.textContent= `aktualny stan licznika to ${number}`;
+        }
+
+        window.addEventListener('click', add);
+    </script>
+    
+</body>
+</html>
