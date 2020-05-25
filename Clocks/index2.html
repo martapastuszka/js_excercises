@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Projekt 11 - zadanie 2 - odliczanie do startu</title>
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			background-color: black;
+			font-family: arial;
+			color: white;
+			align-items: center;
+			height: 100vh;
+		}
+
+		h1 {
+			font-size: 40px;
+		}
+
+		p {
+			font-family: monospace;
+			font-size: 22px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<p>Statek doleci do Jowisza za:</p>
+	<h1>
+		<span class="d">.</span> d:
+		<span class="h">.</span> h:
+		<span class="m">.</span> m:
+		<span class="s">.</span>s
+	</h1>
+
+</body>
+<script>
+    
+    const endTime = new Date('2020-06-01 17:35:00').getTime();
+    const spanD = document.querySelector('span.d');
+    const spanH = document.querySelector('span.h');
+    const spanM = document.querySelector('span.m');
+    const spanS = document.querySelector('span.s');
+
+    setInterval(()=>{
+        const nowTime = new Date().getTime();
+        // const time = Math.floor((endTime - nowTime)/1000);
+        const time = endTime - nowTime;
+        const days = Math.floor((endTime/(1000*60*60*24)) - (nowTime/(1000*60*60*24)));
+        console.log(days);
+        const hours = Math.floor(endTime/(1000*60*60) - nowTime/(1000*60*60)) % 24;
+        //Powyżej robimy tylko modulo, ponieważ interesuje nas tylko reszta - dni mamy policzone już w zmiennej days. 
+        console.log(hours);
+        const minutes = Math.floor((endTime/(1000*60) - nowTime/(1000*60))% 60);
+        console.log(minutes);
+        let seconds = Math.floor((endTime/(1000) - nowTime/(1000))% 60);
+        seconds = seconds< 10 ? `0${seconds}` : seconds;
+        console.log(seconds);
+
+        spanD.textContent = days;
+        spanH.textContent = hours;
+        spanM.textContent = minutes;
+        spanS.textContent = seconds;
+    }, 1000);
+  
+
+</script>
+
+</html>
