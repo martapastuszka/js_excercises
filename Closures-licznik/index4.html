@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licznik czasu na stronie z closures bez zmiennej globalnej</title>
+</head>
+<body>
+    <script>
+        //pobranie body do js. i podmiana jego textContent na stworzony licznik,
+        //funkcja number, która będzie miała zmienną number i ją zwracała
+        //funkcja number -> z metodą getSeconds
+        //funkcja counter, która będzie korzystała ze zmiennej number
+
+//Licznik bez closures ze zmienną globalną
+        // let seconds = 0;
+
+        // const counter = ()=>{
+        //     document.body.textContent = `Spędziłeś na stronie ${seconds} sekund`; 
+        //     seconds++;
+        // }
+        // setInterval(counter, 1000);
+
+//Licznik z closures bez zmiennej globalnej
+        
+        const number = ()=>{
+            let seconds = 0;
+            return ()=>{
+                document.body.textContent = `Spędziłeś na stronie ${seconds} sekund`; 
+                seconds++;
+            }
+        }
+        const counter = number();
+        setInterval(counter, 1000);
+
+    </script>  
+</body>
+</html>
