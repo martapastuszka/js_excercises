@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprawdzenie wieku użytkownika i wyświetlenie komunikatu</title>
+</head>
+<body>
+    <script>
+        const user =(name ='', age)=>{
+            let userName = name;
+            let userAge = age;
+
+            function showName(){
+                console.log(`Cześć ${userName}, ${userAge >= 18? 'Możesz kupić piwo' : 'Nie możesz kupić piwa'}`);
+            }
+            return showName
+        }
+
+        const mieszko = user('Mieszko', 20);
+        mieszko();
+    </script>
+</body>
+</html>
