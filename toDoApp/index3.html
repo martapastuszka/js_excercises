@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Projekt - dodawanie zadań</title>
+</head>
+
+<body>
+ <form action="">
+  <input type="text">
+  <button>Dodaj zadanie</button>
+ </form>
+ <h1>Liczba zadań: <span>0</span></h1>
+ <ul></ul>
+ <script>
+     const form = document.querySelector('form');
+     const ul = document.querySelector('ul');
+     const taskNumber = document.querySelector('h1 span');
+    //  const listItems = document.querySelector('li.task'); w globalnym zakresie gdy użyjemy querySelector, to liczba zadań nie będzie zliczana. querySelector tworzy Node List a ten zadziała tylko raz, pobierze element tylko przy starcie programu. Gdy użyjemy getElementByClassName - to stworzy się HTML Collection, a to jest aktualizowane na bieżąco.
+    const listItems = document.getElementsByClassName('task');
+    const input = document.querySelector('input');
+
+    const toDoList = [];
+
+    const removeTask = (e)=>{
+        // e.target.parentNode.remove();
+        const index = e.target.parentNode.dataset.key;
+        toDoList.splice(index, 1);
+        console.log(toDoList);
+        taskNumber.textContent = listItems.length;
+        renderList();
+    }
+
+     const addTask = (e)=>{ 
+        e.preventDefault();
+        const titleTask = input.value; //nie możemy użyć e.target value bo naszym targetem jest formularz.
+        console.log(titleTask);
+        if(titleTask ==='')return;
+            const task = document.createElement('li');
+            toDoList.push(task);
+            renderList();
+            task.className = 'task';
+            task.innerHTML = titleTask + "<button> Usuń </button>";
+            ul.appendChild(task);
+            input.value=''; //nie możemy użyć titleTask, ponieważ ta zmienna już zawiera referencję do pustego stringa
+
+            // const liItems = document.querySelectorAll('li.task').length;
+            taskNumber.textContent=listItems.length;
+            task.querySelector('button').addEventListener('click', removeTask);
+        //ustawiamy querySelector na TASK - pobieramy buttona, którego de facto jeszcze nie ma.
+     }
+
+     const renderList = ()=>{
+        ul.textContent='';
+        toDoList.forEach((toDoElement,key) =>{
+        toDoElement.dataset.key = key;
+        ul.appendChild(toDoElement);
+        });
+     }
+
+     form.addEventListener('submit', addTask);
+ </script>
+</body>
+
+</html>

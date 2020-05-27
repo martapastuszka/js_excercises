@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Projekt to do list - zadanie 2 SEARCH</title>
+</head>
+
+<body>
+ <input type="text">
+ <ul>
+  <li>brukselka</li>
+  <li>groch</li>
+  <li>batat</li>
+  <li>ziemniak</li>
+  <li>burak</li>
+  <li>fasola</li>
+  <li>marchewka</li>
+  <li>pietruszka</li>
+  <li>por</li>
+  <li>cebula</li>
+ </ul>
+
+ <script>
+     //FILTER I PRZYPOMNIENIE MAP
+     //Filter zwraca NOWĄ tablicę.
+    //  const arr = [29, 52, 666, 89, 2603, 32526];
+    //  const oddNumbers = arr.filter((number) =>{ number%2 });
+    //  const evenNumbers = arr.filter(number => {!(number%2)});
+
+     //MAP wykonuje działanie na każdym elemencie tablicy i wynik tego działania jest przekazywany do tablicy.
+    //  const double = arr.map(number => number*2);
+    //  const people = arr.map(number => number + 'osób');
+
+     //forEach - nie zwraca nowej tablicy.
+    //  arr.forEach((number,index) => arr[index]=number*2)
+
+    const input = document.querySelector('input');
+    const ul = document.querySelector('ul');
+    const liElements = document.querySelectorAll('li');
+
+    const searchTask = (e) =>{
+        const searchText = e.target.value.toLowerCase();
+        let tasks = [...liElements];
+        //to co będzie true, zostanie przekazane do nowej tablicy, a to co false, nie zostanie.
+        tasks = tasks.filter(li => li.textContent.toLowerCase().includes(searchText));
+        console.log(tasks);
+        ul.textContent = '';
+        tasks.forEach(li => ul.appendChild(li));
+    }
+
+    input.addEventListener('input', searchTask);
+ </script>
+
+</body>
+
+</html>
