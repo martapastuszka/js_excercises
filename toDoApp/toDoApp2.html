@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>toDoApp</title>
+    <form action="">
+        <input type="text">
+        <button>Dodaj zadanie</button>
+        <button>Usuń wszystkie</button>
+    </form>
+    <input type="text">
+    <h1>Masz <span>0</span> rzeczy do zrobienia</h1>
+    <ul> </ul>
+</head>
+<body>
+    <script>
+        const form = document.querySelector('form');
+        const input = document.querySelector('form input');
+        const ul = document.querySelector('ul');
+        const taskNumber = document.querySelector('h1 span');
+        const liList = document.getElementsByClassName('task');
+        // ostatni element - liList - pobieram przez getElementsBy... ponieważ dzięki temu liList będzie się automatycznie aktualizowało po dodaniu nowego taska. querySelector tego nie zapewnia.
+
+        const addTask = (e)=>{
+            //dodawanie nowego taska do listy
+            e.preventDefault();
+            const taskName = input.value;
+            if(taskName ==='')return;
+            const liElement = document.createElement('li');
+            liElement.className = 'task';
+            liElement.innerHTML = taskName + ' <button>Usuń</button>';
+            ul.appendChild(liElement);
+            input.value = '';
+
+            //aktualizowanie wartości spana z ilością rzeczy do zrobienia
+            taskNumber.textContent = liList.length;
+
+            //eventListener na funkcję removeTask
+            liElement.querySelector('button').addEventListener('click', removeTask);
+        }
+
+        const removeTask = (e)=>{
+            e.target.parentNode.remove();
+            taskNumber.textContent = liList.length;
+        }
+
+
+        form.addEventListener('submit', addTask);
+    </script>
+    
+</body>
+</html>
