@@ -7,7 +7,7 @@
     <form action="">
         <input type="text">
         <button>Dodaj zadanie</button>
-        <button>Usuń wszystkie</button>
+        <button class='delete'>Usuń wszystkie</button>
     </form>
     <input type="text">
     <h1>Masz <span>0</span> rzeczy do zrobienia</h1>
@@ -21,8 +21,9 @@
         const taskNumber = document.querySelector('h1 span');
         const liList = document.getElementsByClassName('task');
         // ostatni element - liList - pobieram przez getElementsBy... ponieważ dzięki temu liList będzie się automatycznie aktualizowało po dodaniu nowego taska. querySelector tego nie zapewnia.
+        const deleteBtn = document.querySelector('.delete');
 
-        const toDoList = [];
+        let toDoList = [];
 
         const addTask = (e)=>{
             //dodawanie nowego taska do listy
@@ -63,6 +64,16 @@
             renderList();
         }
 
+        //Usunięcie całej listy ul i całej tablicy po kliknięciu "usuń wszystko"
+        const removeAll = () =>{
+            ul.textContent ='';
+            toDoList=[];
+            // console.log(toDoList);
+            // console.log('usuwam');
+        }
+
+
+        deleteBtn.addEventListener('click', removeAll);
         form.addEventListener('submit', addTask);
     </script>
     
