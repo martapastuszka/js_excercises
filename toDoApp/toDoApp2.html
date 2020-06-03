@@ -9,7 +9,7 @@
         <button>Dodaj zadanie</button>
         <button class='delete'>Usuń wszystkie</button>
     </form>
-    <input type="text">
+    <input type="text" class='search'>
     <h1>Masz <span>0</span> rzeczy do zrobienia</h1>
     <ul> </ul>
 </head>
@@ -22,6 +22,7 @@
         const liList = document.getElementsByClassName('task');
         // ostatni element - liList - pobieram przez getElementsBy... ponieważ dzięki temu liList będzie się automatycznie aktualizowało po dodaniu nowego taska. querySelector tego nie zapewnia.
         const deleteBtn = document.querySelector('.delete');
+        const search = document.querySelector('.search');
 
         let toDoList = [];
 
@@ -46,7 +47,7 @@
             //eventListener na funkcję removeTask
             liElement.querySelector('button').addEventListener('click', removeTask);
         }
-
+      
         const renderList = ()=>{
             ul.innerHTML = '';
             toDoList.forEach((element, key)=>{
@@ -72,7 +73,28 @@
             // console.log('usuwam');
         }
 
+        //Wyszukiwarka 
+        //Pobieram zawartość inputa
+        //Pobieram aktualną zawartość listy tasków - zrobione w taskList
+        //Chcę porównać każdy element liListy(który jest tablicy teraz)z zawartością inputa searchVal
+        //Wyświetlić zawartość liList ograniczając się do pasujących wyników.
 
+        //Callback to jest funkcja, która jest wywoływana przez inną funkcję
+
+          //Nie można wykonać appendChild na stringu
+        const searchTask = ()=>{
+            const searchVal = search.value.toLowerCase();
+            const taskList = [...liList];
+            //Tworzę nową tablicę przez metodę filter, wywołującą funkcję, która zwraca true/false
+            let selectedValues = taskList.filter(task => task.textContent.toLowerCase().includes(searchVal));
+            ul.textContent = '';
+            selectedValues.forEach(task => ul.appendChild(task));    
+            console.log(selectedValues);     
+        }
+
+        // tasks = tasks.filter(li => li.textContent.toLowerCase().includes(searchText));
+
+        search.addEventListener('input', searchTask);
         deleteBtn.addEventListener('click', removeAll);
         form.addEventListener('submit', addTask);
     </script>
