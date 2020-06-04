@@ -39,7 +39,7 @@
 
             //Dodawanie elementów do listy za pomocą tablicy
             toDoList.push(liElement);
-            renderList();
+            renderList(toDoList);
             
             //aktualizowanie wartości spana z ilością rzeczy do zrobienia
             taskNumber.textContent = toDoList.length;
@@ -48,13 +48,13 @@
             liElement.querySelector('button').addEventListener('click', removeTask);
         }
       
-        const renderList = ()=>{
+        const renderList = (listToRender)=>{
             ul.innerHTML = '';
-            toDoList.forEach((element, key)=>{
+            listToRender.forEach((element, key)=>{
                 element.dataset.key = key;
                 ul.appendChild(element);
             })
-            console.log(toDoList);
+            console.log(listToRender);
         }
 
         const removeTask = (e)=>{
@@ -62,7 +62,8 @@
             const index = e.target.parentNode.dataset.key;
             toDoList.splice(index, 1);
             taskNumber.textContent = toDoList.length;
-            renderList();
+            ul.removeChild(index);
+            searchTask();
         }
 
         //Usunięcie całej listy ul i całej tablicy po kliknięciu "usuń wszystko"
@@ -83,13 +84,18 @@
 
           //Nie można wykonać appendChild na stringu
         const searchTask = ()=>{
-            const searchVal = search.value.toLowerCase();
-            const taskList = [...liList];
-            //Tworzę nową tablicę przez metodę filter, wywołującą funkcję, która zwraca true/false
-            let selectedValues = taskList.filter(task => task.textContent.toLowerCase().includes(searchVal));
-            ul.textContent = '';
-            selectedValues.forEach(task => ul.appendChild(task));    
-            console.log(selectedValues);     
+            if(search.value ==='') renderList(toDoList);
+            else{
+                let searchVal = search.value.toLowerCase();
+                const taskList = [...liList];
+                //Tworzę nową tablicę przez metodę filter, wywołującą funkcję, która zwraca true/false
+                let selectedValues = taskList.filter(task => task.textContent.toLowerCase().includes(searchVal));
+                renderList(selectedValues);
+
+                // ul.textContent = '';
+                // selectedValues.forEach(task => ul.appendChild(task));    
+                // console.log(selectedValues);
+            }
         }
 
         // tasks = tasks.filter(li => li.textContent.toLowerCase().includes(searchText));
