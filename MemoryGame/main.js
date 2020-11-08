@@ -12,7 +12,7 @@ function showAllCards(){
 
 function hideAllCards(){
     for(i=0; i<divItems.length;i++){
-        divItems[i].className='hidden';
+        if(divItems[i].className !='off') divItems[i].className='hidden';
     }
 }
 
@@ -30,11 +30,26 @@ function hideAllCards(){
 // }
 
 let visibleCards = 0;
+let cardToBeComparedWith;
 
 const showCard =(e) =>{
-    visibleCards++;
-    if(visibleCards<=2) e.target.className=cardColors[e.target.dataset.key];
-    if(visibleCards==2) setTimeout(twoSecondTimer, 1000);
+    if((typeof cardToBeComparedWith==='undefined') || (cardToBeComparedWith.dataset.key!=e.target.dataset.key && e.target.className !='off')){
+        visibleCards++;
+        console.log(e.target.dataset.key);
+        if(visibleCards<=2) e.target.className=cardColors[e.target.dataset.key];
+        if(visibleCards==1) cardToBeComparedWith=e.target;
+        if(visibleCards==2){
+            setTimeout(twoSecondTimer, 1000);
+            if(cardToBeComparedWith.className==e.target.className){
+                console.log('takie same');
+                cardToBeComparedWith.className = 'off';
+                e.target.className='off';
+            } 
+            else{
+                console.log('nie takie same');
+            }
+        }
+    }
 }
 
 const twoSecondTimer = function(){
