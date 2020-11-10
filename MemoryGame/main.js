@@ -16,18 +16,16 @@ function hideAllCards(){
     }
 }
 
-// let start;
+let start;
+let timeOfGame;
+function startTimer(){
+    start = Math.floor(Date.now()/1000);
+}
 
-// function startTimer(){
-//     // console.log (start);
-//     start = Math.floor(Date.now()/1000);
-//     let timeCount = setTimeout(startTimer, 1000);
-// }
-
-// function stopTimer(){
-//     let stop = Math.floor(Date.now()/1000);
-//     let timeOfGame = stop - start;
-// }
+function stopTimer(){
+    let stop = Math.floor(Date.now()/1000);
+    timeOfGame = stop - start;
+}
 
 let visibleCards = 0;
 let cardToBeComparedWith;
@@ -35,26 +33,33 @@ let cardToBeComparedWith;
 const showCard =(e) =>{
     if((typeof cardToBeComparedWith==='undefined') || (cardToBeComparedWith.dataset.key!=e.target.dataset.key && e.target.className !='off')){
         visibleCards++;
-        console.log(e.target.dataset.key);
+        // console.log(e.target.dataset.key);
         if(visibleCards<=2) e.target.className=cardColors[e.target.dataset.key];
         if(visibleCards==1) cardToBeComparedWith=e.target;
         if(visibleCards==2){
-            setTimeout(twoSecondTimer, 1000);
+            setTimeout(halfSecondTimer, 500);
             if(cardToBeComparedWith.className==e.target.className){
-                console.log('takie same');
+                // console.log('takie same');
                 cardToBeComparedWith.className = 'off';
                 e.target.className='off';
             } 
-            else{
-                console.log('nie takie same');
-            }
         }
     }
 }
 
-const twoSecondTimer = function(){
+const halfSecondTimer = function(){
     hideAllCards();
     visibleCards=0;
+    let flag = 0;
+    for(i=0; i<divItems.length; i++){
+        if(divItems[i].className == 'off'){
+            flag++;
+        }
+        if(divItems.length == flag){
+            stopTimer();
+            alert (`Gratulacje. Twój czas gry to ${timeOfGame} sekund!`)
+        }
+    }
 }
 
 //muszę mieć więcej czynności wykonywanych na onload - poprawić
@@ -62,7 +67,7 @@ showAllCards();
 setTimeout(hideAllCards, 2000);
 
 
-// document.addEventListener(onload, startTimer());
+document.addEventListener(onload, startTimer());
 
 const myCard = document.querySelectorAll('div').forEach(item=> item.addEventListener('click', showCard));
 
