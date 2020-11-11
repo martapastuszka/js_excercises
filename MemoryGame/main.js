@@ -1,23 +1,25 @@
 const cardColors = ['red','red', 'blue','blue', 'yellow', 'yellow', 'green', 'green', 'brown', 'brown','gray', 'gray','lightgreen', 'lightgreen', 'cadetblue', 'cadetblue','violet','violet'];
 
-cardColors.sort(() => Math.random() - 0.5);
-const divItems = [...document.getElementsByTagName('div')];
+// Cards randomizer
+function cardsRandomizer(){
+    cardColors.sort(() => Math.random() - 0.5);
+}
 
-//przypisuję divom kolory
+//Colors signup
 function showAllCards(){
     for(i=0; i<divItems.length; i++){
         divItems[i].className=cardColors[i]; 
     }
 }
 
-// ukrywam karty, jeśli para ma różne kolory
+// Hiding cards, when different colors
 function hideAllCards(){
     for(i=0; i<divItems.length;i++){
         if(divItems[i].className !='off') divItems[i].className='hidden';
     }
 }
 
-// włączam timer liczący czas gry
+// Starting the game timer
 let start;
 let timeOfGame;
 function startTimer(){
@@ -29,7 +31,7 @@ function stopTimer(){
     timeOfGame = stop - start;
 }
 
-// odkrywam karty na kliknięcie i porównuję ich kolory
+// Display cards onclick and comparing their colors
 let visibleCards = 0;
 let cardToBeComparedWith;
 
@@ -45,7 +47,7 @@ const showCard =(e) =>{
     }
 }
 
-//ukrywam parę kard o tym samym kolorze. 
+//I hide a pair with the same color
 const removingCards = function(e){ 
      if(cardToBeComparedWith.className==e.target.className){
         cardToBeComparedWith.className = 'off';
@@ -53,7 +55,7 @@ const removingCards = function(e){
     } 
 }
 
-// sprawdzam, czy wczystkie karty odkryte, jeżeli tak, kończę grę i wyświetlam czas gry
+//Check if all colors are out of game. If so, end the game, show alert with time of the game.
 const halfSecondTimer = function(){
     hideAllCards();
     visibleCards=0;
@@ -70,15 +72,17 @@ const halfSecondTimer = function(){
     }
 }
 
-// elementy do wykonania po załadowaniu strony
+// Elements to be executed after page loaded
 
 function executeAfterLoading(){
+    cardsRandomizer();
     showAllCards();
     setTimeout(hideAllCards, 2000);
     startTimer();
-    const myCard = document.querySelectorAll('div').forEach(item=> item.addEventListener('click', showCard));
 }
-
+// fix issues with getting divItems and assigning EventListener
+const divItems = [...document.getElementsByTagName('div')];
+divItems.forEach(item=> item.addEventListener('click', showCard));
 document.addEventListener(onload, executeAfterLoading());
 
 
